@@ -17,4 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/auth', function () {
+	// Perform a check whether the user is authenticated or not
+	// Remove the if block during production
+	if(!Auth::check())
+	{
+		// If they are not, we forcefully login the user with id=1
+		$user = App\User::find(1);
+		Auth::login($user);
+	}
+	return Auth::user();
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
