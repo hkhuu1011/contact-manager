@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { JarwisService } from '../../services/jarwis.service';
-import { TokenService} from '../../services/token.service';
+import { TokenService } from '../../services/token.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
   	private Jarwis: JarwisService,
   	private Token: TokenService,
-  	private router : Router
+  	private router : Router,
+  	private Auth: AuthService
   ) { }
 
   onSubmit() {
@@ -32,9 +34,10 @@ export class LoginComponent implements OnInit {
   	);
   }
 
-  // Login & redirects to profile page
+  // Signup & redirects to profile page
   handleResponse(data) {
     this.Token.handle(data.access_token);
+    this.Auth.changeAuthStatus(true);
     this.router.navigateByUrl('/profile');
   }
 
