@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
-    public function sendEmail()
+    public function sendEmail(Request $request)
     {
+        return $request->all();
 
-        
     }
 }
